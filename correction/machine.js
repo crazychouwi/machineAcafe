@@ -1,3 +1,6 @@
+// ce fichier vous montre parfaitement pourquoi je vous disais de découper votre code en petite partie
+
+
 // une fonction à la différence d'une procédure permet de renvoyer des valeurs
 // !!! attention !!! les variables définies dans une fonction ne peuvent être utilisées en dehors de celle ci !
 // c'est pour cela que l'on se sert de valeurs retournées
@@ -76,8 +79,10 @@ function getMessageLstChoixCafe( lstChoixCafe) {
 }
 
 // permet de traiter le choix de l'utilisateur
-function traitementChoix(messageChoix, lstChoixCafe) {
-    var choix = prompt(messageChoix);
+function traitementChoix(messageChoix, lstChoixCafe, montantInsere) {
+
+    // on indique à l'utilisateur son solde et la liste des choix
+    var choix = prompt("Solde :"+montantInsere+'\n'+messageChoix);
 
     // le choix ne doit pas être égale à 0 ou supérieur à la taille du tableau
     while (choix == 0 || choix > lstChoix.length) {
@@ -88,13 +93,54 @@ function traitementChoix(messageChoix, lstChoixCafe) {
 }
 
 
-
-
 function preparationCafe(cafe) {
 
     return "préparation en cours : " + cafe;
 }
 
-function traitementPiece(pieceUtilisateur, lstPieceUtilisateur) {
+// permet d'indiquer à l'utilisateur s'il faut qu'il insère encore des pièces ou pas
+function traitementPiece(prixMinimum) {
+    // l'utilisateur insère une pièce
+    var messagePiece = "Insérez votre monnaie :";
+
+    // la toute première fois on affiche le message pour insérer des pièces
+    // on parse la valeur sinon le code inArray (écrit plus bas) ne fonctionne pas car il doit comparer une chaine avec un float (chiffre à virgule)
+    // parse = passer le type d'une variable en un autre
+    // - "ouh putain il est corsé ce codeuh !!!"
+    // - "je te jure ces gens qui viennent de je sais pas où, ils sont bizarreuh."
+    // blague à part, si vous arrivez à comprendre tout ce code, vous avez fait la moitié du chemin pour devenir programmeur !!! l'autre moitié étant d'arriver à le faire !!!
+    // pour info j'ai pondu ce code en 2 heures, j'ai programmé au fur et à mesure et c'était dur !!!
+    var pieceInsere = parseFloat(prompt(messagePiece));
+    var solde = 0;
+
+    // liste des pièces acceptées
+    var lstPieceAcceptees = [0.1, 0.2, 0.5, 1, 2];
+
+    // le message d'erreur est soit "montant insuffisant" soit "pièces non acceptées"
+    var messageErreur = '';
+
+    // tant que le solde n'est pas égale au prix minimum, on demande à l'utilisateur d'insérer une pièce et en lui indiquant le solde
+    while(solde < prixMinimum) {
+
+        // on utilise la fonction inArray pour savoir si la pièce insérée est présente dans le tableau des pièces acceptées
+        // si la pièce est acceptée on est quand même dans le cas où le montant est insuffisant
+        if($.inArray(pieceInsere,lstPieceAcceptees) != -1) {
+            messageErreur =  'Montant insuffisant. \nVous devez insérer au minimum : '+prixMinimum+" euro(s).";
+            // on ajoute la pièce au solde
+            solde += pieceInsere;
+        }
+        // la machine n'accepte que les pièces de 0.10, 0.20, 0.50, 1 et 2 euros
+        else {
+            messageErreur = 'Pièces non acceptées. Veuillez insérer 0.10, 0.20, 0.50, 1 ou 2 euros. \n';
+
+        }
+
+        // il faut parser le montant en float car par défaut c'est considéré comme une chaine
+        // si on ajoute un montant à une chaine c'est comme si on la concaténait
+        // donc ça n'ajoute pas une somme
+        pieceInsere = parseFloat(prompt(messageErreur+'\nSolde : '+solde+' euros.\n'+messagePiece));
+    }
+
+    return solde;
 
 }

@@ -2,7 +2,7 @@
 // elles sont présentes dans le fichier machine.js afin de lire facilement le programme principal
 
 // on met ce code avant d'entrer dans la boucle sinon il sera exécuter à chaque fois qu'un utilisateur voudra prendre un café
-// (comment faire ramer un programme inutilement ???)
+// (comment faire ramer un programme ???)
 
 // permet de définir la liste des choix de cafés
 // getLstChoixCafe() retourne un tableau
@@ -22,12 +22,13 @@ var prixMininimum = getPrixMinimumCafe(lstChoix);
     // tant qu'il y a le stock de gobelets
    for (var gobelets = 2; gobelets > 0; gobelets--) {
 
-        var piece = prompt("insérez votre pièces:");
-        // affiche le message avec la liste des cafés, traite les erreurs et récupère le choix de l'utilisateur
-        var choix = traitementChoix(messageChoix,lstChoix);
+       var montantInsere = traitementPiece(prixMininimum);
+
+        // affiche le message avec la liste des cafés et le solde de l'utilisateur, traite les erreurs et récupère le choix de l'utilisateur
+        var choix = traitementChoix(messageChoix,lstChoix, montantInsere);
         var prix = lstChoix[choix]["prix"];
 
-        var rendu = piece - prix;
+        var rendu = montantInsere - prix;
 
         var messagePreparation = preparationCafe(lstChoix[choix]["libelle"]);
 
