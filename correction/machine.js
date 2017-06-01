@@ -1,0 +1,100 @@
+// une fonction à la différence d'une procédure permet de renvoyer des valeurs
+// !!! attention !!! les variables définies dans une fonction ne peuvent être utilisées en dehors de celle ci !
+// c'est pour cela que l'on se sert de valeurs retournées
+
+// retourne la liste des différents choix de cafés
+function getLstChoixCafe() {
+    // on créé un tableau
+    var lstChoixCafe =[];
+    // on indique à la colonne 0, on a une ligne qui s'appelle libellé et une autre prix
+    lstChoixCafe[0] = {libelle: "Café court", prix: 1};
+    // on indique à la colonne 1, on a une ligne qui s'appelle libellé et une autre prix
+    lstChoixCafe[1] = {libelle: "Café au lait", prix: 1.50};
+    // on indique à la colonne 1, on a une ligne qui s'appelle libellé et une autre prix
+    lstChoixCafe[2] = {libelle: "Café allongé", prix: 1.30};
+
+    // si on veut dessiner le tableau, ça correspond à ça
+    /*
+     |       0       |        1       |       2
+     libelle  | "Café court"  | "Café au lait" | "Café allongé"
+     prix     | 1             | 1.50           | 1.30
+
+     */
+
+    // pour obtenir le prix du café en colonne 2, je dois faire lstChoix[2]["prix"]
+    // si je met seulement lstChoix, le programme va me retourner array car il me retourne tout le tableau
+    // si je met seulement lstChoix[2], il va me retourner aussi array car il y a un tableau dans la colonne 2
+    // si je met seulement lstChoix['prix'], il va me retourner une erreur. En effet, on doit signaler le premier index, ici c'est un chiffre.
+
+    // on retourne le tableau
+    return lstChoixCafe;
+
+}
+
+// pour connaître le prix minimum du tableau
+// soit on recréé un tableau histoire que ça rame bien :)
+// soit on passe en paramètre le tableau qui permet de le récupérer et de le traiter
+// soit on déclare des variables globales (c'est ce que l'on a ici mais je préfère vous montrer avec les paramètres)
+function getPrixMinimumCafe(lstChoixCafe) {
+
+    // on récupère le prix de la première ligne
+    // en effet, cela nous permet d'avoir un point de comparaison réel
+    var prixMinimumCafe = lstChoixCafe[0]["prix"];
+
+    // on commence à parcourrir le tableau à partir de la ligne 1 car on a déjà le prix de la ligne 0
+    for (var index = 1; index < lstChoixCafe.length; index++) {
+
+        // si le prix en cours de lecture est plus petit que celui enregistré dans la variable prixMinimum
+        if (lstChoixCafe[index]["prix"] < prixMinimumCafe) {
+            // alors on l'enregistre dans la variable prixMinimum
+            prixMinimumCafe = lstChoixCafe[index]["prix"];
+        }
+    }
+
+    // console.log(prixMinimumCafe);
+    return prixMinimumCafe;
+}
+
+// permet d'afficher la liste des choix du tableau
+// ainsi si on rajoute une boisson, elle sera affichée automatiquement
+function getMessageLstChoixCafe( lstChoixCafe) {
+
+    // \n permet un retour à la ligne
+    var messageLstChoixCafe = "Faites votre choix :\n";
+
+    // équivalent du foreach avec jquery
+    $.each(lstChoixCafe, function(index, unCafe) {
+        console.log(unCafe);
+        // le numéro du choix est égal à l'index + 1
+        var choix = index+1;
+        // on concatène dans le messageLstChoixCafe, la valeur du libellé et du prix
+        messageLstChoixCafe = messageLstChoixCafe + "- " +choix+" : "+ unCafe["libelle"]+ " : " + unCafe["prix"] + " euros\n";
+
+    });
+
+    return messageLstChoixCafe;
+}
+
+// permet de traiter le choix de l'utilisateur
+function traitementChoix(messageChoix, lstChoixCafe) {
+    var choix = prompt(messageChoix);
+
+    // le choix ne doit pas être égale à 0 ou supérieur à la taille du tableau
+    while (choix == 0 || choix > lstChoix.length) {
+        choix = prompt("Erreur ! choix invalide." + messageChoix);
+    }
+
+    return choix;
+}
+
+
+
+
+function preparationCafe(cafe) {
+
+    return "préparation en cours : " + cafe;
+}
+
+function traitementPiece(pieceUtilisateur, lstPieceUtilisateur) {
+
+}
