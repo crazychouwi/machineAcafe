@@ -1,0 +1,3 @@
+- trouver le bug qui se cache dans le programme (c'est au moment du choix d'un café)
+- ajouter la gestion du sucre
+- on ne code pas pour l'instant l'annulation du café.
