@@ -18,7 +18,7 @@ function getLstChoixCafe() {
 
     // si on veut dessiner le tableau, ça correspond à ça
     /*
-     |       0       |        1       |       2
+              |       0       |        1       |       2
      libelle  | "Café court"  | "Café au lait" | "Café allongé"
      prix     | 1             | 1.50           | 1.30
 
