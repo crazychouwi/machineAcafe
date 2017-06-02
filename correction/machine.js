@@ -106,10 +106,10 @@ function traitementPiece(prixMinimum) {
     // la toute première fois on affiche le message pour insérer des pièces
     // on parse la valeur sinon le code inArray (écrit plus bas) ne fonctionne pas car il doit comparer une chaine avec un float (chiffre à virgule)
     // parse = passer le type d'une variable en un autre
-    // - "ouh putain il est corsé ce codeuh !!!"
-    // - "je te jure ces gens qui viennent de je sais pas où, ils sont bizarreuh."
-    // blague à part, si vous arrivez à comprendre tout ce code, vous avez fait la moitié du chemin pour devenir programmeur !!! l'autre moitié étant d'arriver à le faire !!!
-    // pour info j'ai pondu ce code en 2 heures, j'ai programmé au fur et à mesure et c'était dur !!!
+
+    // ça va ? vous n'avez pas envie de mourrir ?
+    // si vous arrivez à comprendre ce code, vous avez fait la moitié du chemin pour devenir programmeur !!! l'autre moitié étant d'arriver à le faire !!!
+    // pour info j'ai pondu cette fonction en 2 heures, en effaçant, en refaisant, en bloquant dessus. j'ai programmé au fur et à mesure et c'était dur !!!
     var pieceInsere = parseFloat(prompt(messagePiece));
     var solde = 0;
 
