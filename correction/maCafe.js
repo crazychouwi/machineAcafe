@@ -10,6 +10,7 @@
 // je ne peux donc pas écrire
 // getLstChoixCafe();
 // et après utiliser le tableau lstChoixCafe
+// il faut que je redéclare une variable pour lui assigner un tableau
 var lstChoix = getLstChoixCafe();
 
 // on récupère sous forme de chaîne les différents choix possibles
@@ -18,33 +19,29 @@ var messageChoix = getMessageLstChoixCafe(lstChoix);
 // on récupère le prix le plus petit de la machine à café
 var prixMininimum = getPrixMinimumCafe(lstChoix);
 
+// si mettons par la suite on veut faire en sorte que la machine soit hors service si elle n'a plus de café, il faudra alors refaire une autre boucle ou encore un truc compliqué
+// pour améliorer le code afin de le faire évoluer
+// j'ajoute un boolean permettant d'indiquer l'état de marche de la machine
+// et je jouerai avec pour signaler ou non que la machine puisse servir des cafés
+var etatMarche = true;
+
+var gobelets = 2;
+
 
     // tant qu'il y a le stock de gobelets
-   for (var gobelets = 2; gobelets > 0; gobelets--) {
+    while (etatMarche) {
 
-       var montantInsere = traitementPiece(prixMininimum);
+           var montantInsere = traitementPiece(prixMininimum);
 
-        // affiche le message avec la liste des cafés et le solde de l'utilisateur, traite les erreurs et récupère le choix de l'utilisateur
-        var choix = traitementChoix(messageChoix,lstChoix, montantInsere);
-        var prix = lstChoix[choix]["prix"];
+            // affiche le message avec la liste des cafés et le solde de l'utilisateur, traite les erreurs et récupère le choix de l'utilisateur
+            var choix = traitementChoix(messageChoix,lstChoix, montantInsere);
+            var prix = lstChoix[choix]["prix"];
 
-        var rendu = montantInsere - prix;
 
-        var messagePreparation = preparationCafe(lstChoix[choix]["libelle"]);
+            preparationCafe(lstChoix[choix]["libelle"]);
 
-       if (piece == prix) {
-           alert(messagePreparation);
-           alert("voici votre café");
-       }
-       else if (piece > price) {
-           alert(messagePreparation);
-           alert("voici votre monnaie " + rendu + " Euros");
-           alert("voici votre café");
-       }
-       else if (piece < price) {
-           alert("pièce minimum 1€");
+            rendreMonnaie(solde, prix);
 
-       }
 
 
     }

@@ -92,10 +92,13 @@ function traitementChoix(messageChoix, lstChoixCafe, montantInsere) {
     return choix;
 }
 
-
+// procédure permettant de signaler la préparation du café et qu'il soit servi
+// une procédure fait une action mais ne renvoit pas de valeurs ! (pas de return)
 function preparationCafe(cafe) {
 
-    return "préparation en cours : " + cafe;
+     alert("préparation en cours : " + cafe);
+     alert("voici votre café");
+
 }
 
 // permet d'indiquer à l'utilisateur s'il faut qu'il insère encore des pièces ou pas
@@ -142,6 +145,17 @@ function traitementPiece(prixMinimum) {
     }
 
     return solde;
+
+
+}
+
+// procédure permettant de rendre la monnaie
+// une procédure fait une action mais ne renvoit pas de valeurs ! (pas de return)
+function rendreMonnaie(solde, prixCafe) {
+
+    if(rendu > 0) {
+        alert("voici votre monnaie " + rendu + " Euros");
+    }
 
 
 }
