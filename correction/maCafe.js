@@ -25,23 +25,29 @@ var prixMininimum = getPrixMinimumCafe(lstChoix);
 // et je jouerai avec pour signaler ou non que la machine puisse servir des cafés
 var etatMarche = true;
 
-var gobelets = 2;
+var nbGobelets = 2;
 
 
-    // tant qu'il y a le stock de gobelets
+    // tant que la machine est en marche
     while (etatMarche) {
 
-           var montantInsere = traitementPiece(prixMininimum);
+            // gestion des pièces insérées par l'utilisateur
+            var montantInsere = traitementPiece(prixMininimum);
 
             // affiche le message avec la liste des cafés et le solde de l'utilisateur, traite les erreurs et récupère le choix de l'utilisateur
             var choix = traitementChoix(messageChoix,lstChoix, montantInsere);
+
+            // récupère le prix du café choisi
             var prix = lstChoix[choix]["prix"];
 
-
+            // affichage de la préparation du café
             preparationCafe(lstChoix[choix]["libelle"]);
 
-            rendreMonnaie(solde, prix);
+            // affichage de la monnaie à rendre
+            rendreMonnaie(montantInsere, prix);
 
+            // gestion de l'état de marche de la machine
+            etatMarche = gestionEtatEnMarche(nbGobelets);
 
 
     }
