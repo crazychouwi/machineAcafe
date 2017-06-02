@@ -143,4 +143,5 @@ function traitementPiece(prixMinimum) {
 
     return solde;
 
+
 }
