@@ -40,8 +40,8 @@ var nbGobelets = 2;
             // récupère le prix du café choisi
             var prix = lstChoix[choix]["prix"];
 
-            // affichage de la préparation du café
-            preparationCafe(lstChoix[choix]["libelle"]);
+            // gestion des gobelets et affichage de la préparation du café
+            nbGobelets = preparationCafe(lstChoix[choix]["libelle"], nbGobelets);
 
             // affichage de la monnaie à rendre
             rendreMonnaie(montantInsere, prix);

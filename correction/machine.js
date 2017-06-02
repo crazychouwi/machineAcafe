@@ -94,13 +94,14 @@ function traitementChoix(messageChoix, lstChoixCafe, montantInsere) {
     return choix;
 }
 
-// procédure permettant d'utiliser un gobelet et de signaler la préparation du café et qu'il soit servi
+// fonction permettant d'utiliser un gobelet et de signaler la préparation du café et qu'il soit servi
 // une procédure fait une action mais ne renvoit pas de valeurs ! (pas de return)
 function preparationCafe(cafe, nbGobelets) {
 
-    utiliserGobelet(nbGobelets);
+    nbGobelets--;
     alert("préparation en cours : " + cafe);
     alert("voici votre café");
+    return nbGobelets;
 
 }
 
@@ -148,7 +149,9 @@ function traitementPiece(prixMinimum) {
                 // en fait javascript passe en langage plus bas niveau pour faire des calculs
                 // il traduit les float qu'on lui passe et fait son calcul et des fois ça ne tombe pas juste !
                 // il faut donc dire au programme récupère moi les deux chiffres après la virgule.
-                solde = solde.toFixed(2);
+                // quand on met la fonction toFixed ce con de js le parse en string
+                // il faut donc reparser le solde en float (youpi !)
+                solde = parseFloat(solde.toFixed((2)));
             }
             // la machine n'accepte que les pièces de 0.10, 0.20, 0.50, 1 et 2 euros
             else {
@@ -168,6 +171,9 @@ function traitementPiece(prixMinimum) {
 function rendreMonnaie(solde, prixCafe) {
 
     var rendu = solde - prixCafe;
+    // quand on met la fonction toFixed ce con de js le parse en string
+    // il faut donc reparser le solde en float (youpi !)
+    rendu = parseFloat(rendu.toFixed((2)));
     if (rendu > 0) {
         alert("voici votre monnaie " + rendu + " Euros");
     }
@@ -175,19 +181,15 @@ function rendreMonnaie(solde, prixCafe) {
 
 }
 
-function utiliserGobelet(nbGobelets) {
-
-}
 
 // fonction permettant d'indiquer l'etat de marche de la machine selon le nombre de gobelets
 // on pourrait aussi ajouter selon le stock de café
 // s'il y a évolution à faire, ce sera dans cette fonction directement et pas dans le programme principal
 // hé oui! on est des feignasses !!! on veut retoucher le moins possible au code !!
-function gestionEtatEnMarche() {
+function gestionEtatEnMarche(nbGobelets) {
     // par défaut la machine est en marche
     var etatMarche = true;
-    // on enlève un gobelet
-    nbGobelets--;
+
     // s'il n'y a plus de gobelets
     if (nbGobelets == 0) {
         // la machine ne marche plus
