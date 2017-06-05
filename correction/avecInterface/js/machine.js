@@ -60,16 +60,24 @@ function getPrixMinimumCafe(lstChoixCafe) {
 
 // permet d'afficher la liste des choix du tableau
 // ainsi si on rajoute une boisson, elle sera affichée automatiquement
+// on pourrait ajouter plusieurs paramètres pour décider de l'endroit où on veut afficher le messsage d'information, le message de la liste des cafés
+// ou sous quelle forme html on veut caser les informations
 function getMessageLstChoixCafe(lstChoixCafe) {
 
-    // \n permet un retour à la ligne
-    var messageLstChoixCafe = "Faites votre choix :\n";
+    // déclarer le message
+    var messageLstChoixCafe = "Faites votre choix :";
+    // on indique l'endroit où on décide d'afficher ce message
+
+
+    // on ajoute une liste html pour énumérer les café
+
 
     // équivalent du foreach avec jquery
     $.each(lstChoixCafe, function (index, unCafe) {
         console.log(unCafe);
         // le numéro du choix est égal à l'index + 1
         var choix = index + 1;
+        var elementHtml = $("<span/>");
         // on concatène dans le messageLstChoixCafe, la valeur du libellé et du prix
         messageLstChoixCafe = messageLstChoixCafe + "- " + choix + " : " + unCafe["libelle"] + " : " + unCafe["prix"] + " euros\n";
 
