@@ -57,6 +57,25 @@ function getPrixMinimumCafe(lstChoixCafe) {
     // console.log(prixMinimumCafe);
     return prixMinimumCafe;
 }
+// retourne sous forme de liste html la liste des cafés
+function getLstCafeHtml(lstChoixCafe) {
+    // on ajoute une liste html pour énumérer les café
+    var lstCafeHtml = $("<ul/>");
+
+    // équivalent du foreach avec jquery
+    $.each(lstChoixCafe, function (index, unCafe) {
+
+        // le numéro du choix est égal à l'index + 1
+        var choix = index + 1;
+        var elementHtml = $("<li/>");
+        // on concatène dans le messageLstChoixCafe, la valeur du libellé et du prix
+        elementHtml.html(messageLstChoixCafe + "- " + choix + " : " + unCafe["libelle"] + " : " + unCafe["prix"] + " euros");
+        lstCafeHtml.append(elementHtml);
+
+    });
+
+    return lstCafeHtml;
+}
 
 // permet d'afficher la liste des choix du tableau
 // ainsi si on rajoute une boisson, elle sera affichée automatiquement
@@ -67,21 +86,9 @@ function getMessageLstChoixCafe(lstChoixCafe) {
     // déclarer le message
     var messageLstChoixCafe = "Faites votre choix :";
     // on indique l'endroit où on décide d'afficher ce message
+    $('.messageMachine').html(messageLstChoixCafe);
 
 
-    // on ajoute une liste html pour énumérer les café
-
-
-    // équivalent du foreach avec jquery
-    $.each(lstChoixCafe, function (index, unCafe) {
-        console.log(unCafe);
-        // le numéro du choix est égal à l'index + 1
-        var choix = index + 1;
-        var elementHtml = $("<span/>");
-        // on concatène dans le messageLstChoixCafe, la valeur du libellé et du prix
-        messageLstChoixCafe = messageLstChoixCafe + "- " + choix + " : " + unCafe["libelle"] + " : " + unCafe["prix"] + " euros\n";
-
-    });
 
     return messageLstChoixCafe;
 }
