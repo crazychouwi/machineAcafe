@@ -1,0 +1,71 @@
+
+#coin {
+  border: 2px solid black;
+
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+
+}
+
+
+
+#interface, #menu {
+  display: inline-block;
+  width:300px;
+  padding: 10px;
+  vertical-align: top;
+}
+
+#interface {
+  width: 50%;
+  padding:0;
+}
+
+#lstCafe, #logo, #menu {
+  border: 1px dotted black;
+}
+
+#logo {
+  text-align: center;
+}
+
+#lstCafe {
+  font-size: 1.5em;
+}
+
+
+.programme{
+  width: 90px;
+  height: 90px;
+  color: black;
+  font-size: 2em;
+
+  box-shadow: 2px 2px 0px 0px white;
+}
+
+#menu .messageMachine {
+  display: inline-block;
+  border: 1px black dotted;
+  width: 255px;
+  text-align: center;
+  background-color: gray;
+  color: white;
+  font-family: arial;
+  /*! line-height: 70px; */
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+#menu #paveNumerique .check {
+  background: url("../images/check.png") no-repeat center;
+}
+#menu #paveNumerique .cancel {
+  background: url("../images/cancel.png") no-repeat center;
+}
+
+#userMoney {
+ display:inline-block;
+  width: 200px;
+  vertical-align: bottom;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Machine à café</title>
+    <link rel="stylesheet" href="{{ chemin_vendor }}bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ chemin_vendor }}bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{chemin_css}}maCafe.css">
+    <script src="{{chemin_vendor}}jquery/jquery.min.js"></script>
+    <script src="{{chemin_vendor}}jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{chemin_js}}piece.js"></script>
+    <script type="text/javascript" src="{{chemin_js}}machine.js"></script>
+    <script type="text/javascript" src="{{chemin_js}}index.js"></script>
+
+    <!--<script type="text/javascript" sindex.jse.js"></script>-->
+</head>
+
+
+<body>
+<div id="interface">
+    <div id="logo">
+        <img class="cafe" src="{{ chemin_images }}cafe.jpg"/>
+
+    </div>
+    <div id="lstCafe">
+
+    </div>
+</div>
+
+<div id="menu">
+    <span class="messageMachine">
+        Bienvenue<br/>
+        Veuillez insérer 0.10, 0.20, 0.50, <br/>
+        1 ou 2 euros :
+    </span>
+    <div id="pieces">
+        <img  src="{{ chemin_images  }}insert.png"/>
+        <div id="coin" class="img-circle"></div>
+    </div>
+    <div id="paveNumerique">
+        {#construction du pavé numérique grâce à une boucle#}
+        {% for i in 9..0 %}
+            <input type="button" class="btn btn-default programme" value="{{ i }}"/>
+        {% endfor %}
+            <input type="button" class=" programme btn btn-default cancel" value=""/>
+            <input type="button" class="programme btn btn-default check" value=""/>
+</div>
+</div>
+<div id="userMoney">
+
+</div>
+
+</body>
+</html>
