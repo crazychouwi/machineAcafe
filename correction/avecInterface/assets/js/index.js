@@ -4,6 +4,9 @@ $(document).ready(function () {
     // on récupère sous forme liste html les différents cafés disponibles et on l'insère dans le dom la liste des cafés
     $("#lstCafe").append(getLstCafeHtml(lstChoix));
 
+    // affichage du message d'accueil
+    $(".messageMachine").html(getMessageAcceuil());
+
 
     // si mettons par la suite on veut faire en sorte que la machine soit hors service si elle n'a plus de café, il faudra alors refaire une autre boucle ou encore un truc compliqué
     // pour améliorer le code afin de le faire évoluer
@@ -51,6 +54,20 @@ $(document).ready(function () {
 
 
         }
+
+    });
+
+    // l'utilisateur peut annuler à tout moment sa commande, la machine rend donc le solde s'il y en a un
+    $('#paveNumerique .cancel').click(function() {
+
+
+
+        $(".messageMachine").html(rendreMonnaie(traitement));
+        // on affiche au bout de deux secondes le message d'accueil
+        setTimeout(function () {
+            $(".messageMachine").html(getMessageAcceuil());
+            }, 2000
+        )
 
     })
 

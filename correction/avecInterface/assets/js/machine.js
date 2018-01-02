@@ -5,6 +5,12 @@
 // !!! attention !!! les variables définies dans une fonction ne peuvent être utilisées en dehors de celle ci !
 // c'est pour cela que l'on se sert de valeurs retournées
 
+
+function getMessageAcceuil() {
+    return "Veuillez insérer 0.10, 0.20, 0.50, <br/>1 ou 2 euros.<br/>";
+}
+
+
 // retourne la liste des différents choix de cafés
 function getLstChoixCafe() {
     // on créé un tableau
@@ -134,7 +140,7 @@ function traitementPiece(traitement) {
     var premierPassage = true;
 
     // l'utilisateur doit insérer une pièce
-    traitement.info = "Veuillez insérer 0.10, 0.20, 0.50, 1 ou 2 euros :<br/>";
+    traitement.info = getMessageAcceuil();
 
     // on récupère la pièce passé dans l'insert
     // on utilise la fonction inArray pour savoir si la pièce insérée est présente dans le tableau des pièces acceptées
@@ -180,16 +186,26 @@ function traitementPiece(traitement) {
 
 // procédure permettant de rendre la monnaie
 // une procédure fait une action mais ne renvoit pas de valeurs ! (pas de return)
-function rendreMonnaie(solde, prixCafe) {
+function rendreMonnaie(traitement, prixCafe) {
 
-    var rendu = solde - prixCafe;
-    // quand on met la fonction toFixed ce con de js le parse en string
-    // il faut donc reparser le solde en float (youpi !)
-    rendu = parseFloat(rendu.toFixed((2)));
-    if (rendu > 0) {
-        alert("voici votre monnaie " + rendu + " Euros");
+    var message = '';
+
+    // si le prix du café == 0 ça veut dire que la personne n'a rien pris et a annulé son choix, on lui rend donc quand même sa monnaie
+    if(typeof prixCafe === "undefined") {
+        prixCafe = 0;
+        message = "Commande annulée.<br/>"
     }
 
+
+   traitement.solde -= prixCafe;
+    // quand on met la fonction toFixed ce con de js le parse en string
+    // il faut donc reparser le solde en float (youpi !)
+    traitement.solde = parseFloat(traitement.solde.toFixed((2)));
+    if (traitement.solde > 0) {
+        message += "voici votre monnaie " + traitement.solde + " Euros";
+    }
+
+    return message;
 
 }
 
