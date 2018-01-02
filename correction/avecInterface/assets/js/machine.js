@@ -98,14 +98,13 @@ function getMessageLstChoixCafe(lstChoixCafe) {
 }
 
 // permet de traiter le choix de l'utilisateur
-function traitementChoix(messageChoix, lstChoixCafe, montantInsere) {
+function traitementChoix( montantInsere) {
 
-    // on indique à l'utilisateur son solde et la liste des choix
-    var choix = prompt("Solde :" + montantInsere + '\n' + messageChoix);
+   var messageChoix = '';
 
     // le choix ne doit pas être égale à 0 ou supérieur à la taille du tableau
     while (choix == 0 || choix > lstChoix.length) {
-        choix = prompt("Erreur ! choix invalide." + messageChoix);
+        messageChoix = prompt("Erreur ! choix invalide." + messageChoix);
     }
     // pour retrouver le bon choix dans le tableau je dois enlever 1
     choix--;
@@ -127,27 +126,27 @@ function preparationCafe(cafe, nbGobelets) {
 // permet d'indiquer à l'utilisateur s'il faut qu'il insère encore des pièces ou pas
 // on retourne un objet permettant de faire un passage par référence
 // c'est à dire que si les éléments sont modifiés à l'extérieur ou à l'intérieur de la fonction on peut toujours récupérer les nouvelles valeurs
-function traitementPiece(traitement) {
+function traitementPiece(machine) {
 
     // on parse la pièce insérée en float au cas ou elle est traitée en chaine de caractère
-    traitement.pieceInsere = parseFloat(traitement.pieceInsere);
+    machine.utilisateur.pieceInsere = parseFloat(machine.utilisateur.pieceInsere);
 
     // liste des pièces acceptées
     var lstPieceAcceptees = [0.1, 0.2, 0.5, 1, 2];
 
-    traitement.erreur = false;
+    machine.erreur = false;
 
     var premierPassage = true;
 
     // l'utilisateur doit insérer une pièce
-    traitement.info = getMessageAcceuil();
+    machine.info = getMessageAcceuil();
 
     // on récupère la pièce passé dans l'insert
     // on utilise la fonction inArray pour savoir si la pièce insérée est présente dans le tableau des pièces acceptées
     // si la pièce est acceptée on est quand même dans le cas où le montant est insuffisant
-    if ($.inArray(traitement.pieceInsere, lstPieceAcceptees) != -1) {
+    if ($.inArray(machine.utilisateur.pieceInsere, lstPieceAcceptees) != -1) {
         // on ajoute la pièce au solde
-        traitement.solde += traitement.pieceInsere;
+        machine.utilisateur.solde += machine.utilisateur.pieceInsere;
         // on doit en plus faire autre chose ! roh c'est chiant. commentez cette ligne pour mieux comprendre.
         // c'est bon ? si vous insérez 0.10 puis 0.20 vous aurez un solde de 0.30000000000000004 euros.
         // bizarre non ?
@@ -156,29 +155,29 @@ function traitementPiece(traitement) {
         // il faut donc dire au programme récupère moi les deux chiffres après la virgule.
         // quand on met la fonction toFixed ce con de js le parse en string
         // il faut donc reparser le solde en float (youpi !)
-        traitement.solde = parseFloat(traitement.solde.toFixed((2)));
+        machine.utilisateur.solde = parseFloat(machine.utilisateur.solde.toFixed((2)));
 
         // tant que le solde n'est pas égale au prix minimum, on demande à l'utilisateur d'insérer une pièce et en lui indiquant le solde
-        if (traitement.solde < traitement.prixMinimum) {
-            traitement.info += 'Montant insuffisant. <br/>Vous devez insérer au minimum : ' + traitement.prixMinimum + " euro(s).<br/>";
+        if (machine.utilisateur.solde < machine.prixMinimum) {
+            machine.info += 'Montant insuffisant. <br/>Vous devez insérer au minimum : ' + machine.prixMinimum + " euro(s).<br/>";
         }
 
 
     }
     // la machine n'accepte que les pièces de 0.10, 0.20, 0.50, 1 et 2 euros
     else {
-        traitement.info += 'Pièces non acceptées.  <br/>';
-        traitement.erreur = true;
+        machine.info += 'Pièces non acceptées.  <br/>';
+        machine.erreur = true;
 
     }
 
-    traitement.info += '\nSolde : ' + traitement.solde + ' euros.<br/>';
+    machine.info += '\nSolde : ' + machine.utilisateur.solde + ' euros.<br/>';
 
-    if (traitement.solde >= traitement.prixMinimum) {
-        traitement.info += "Faites votre choix ou insérez plus de monnaie.";
+    if (machine.utilisateur.solde >= machine.prixMinimum) {
+        machine.info += "Faites votre choix ou insérez plus de monnaie.";
     }
 
-    return traitement;
+    return machine;
 
 
 }
@@ -186,26 +185,28 @@ function traitementPiece(traitement) {
 
 // procédure permettant de rendre la monnaie
 // une procédure fait une action mais ne renvoit pas de valeurs ! (pas de return)
-function rendreMonnaie(traitement, prixCafe) {
+function rendreMonnaie(machine) {
 
     var message = '';
 
     // si le prix du café == 0 ça veut dire que la personne n'a rien pris et a annulé son choix, on lui rend donc quand même sa monnaie
-    if(typeof prixCafe === "undefined") {
-        prixCafe = 0;
-        message = "Commande annulée.<br/>"
+    if(typeof cafeChoisi === "undefined") {
+        cafeChoisi = 0;
+        machine.info = "Commande annulée.<br/>"
     }
 
 
-   traitement.solde -= prixCafe;
+    machine.utilisateur.solde -= cafeChoisi;
     // quand on met la fonction toFixed ce con de js le parse en string
     // il faut donc reparser le solde en float (youpi !)
-    traitement.solde = parseFloat(traitement.solde.toFixed((2)));
-    if (traitement.solde > 0) {
-        message += "voici votre monnaie " + traitement.solde + " Euros";
+    machine.utilisateur.solde = parseFloat(machine.utilisateur.solde.toFixed((2)));
+    if (machine.utilisateur.solde > 0) {
+        machine.info += "voici votre monnaie " + machine.utilisateur.solde + " Euros";
+        // on remet à 0 le solde
+        machine.utilisateur.solde = 0;
     }
 
-    return message;
+    return machine;
 
 }
 
